@@ -66,12 +66,17 @@
             python311Packages.scipy
             python311Packages.sympy
             python311Packages.ecpy
-            python311Packages.ecc
+            python311Packages.py-ecc
+            python311Packages.web3
+            nodePackages.ganache
           ];
           enterShell = ''
             git --version
             nix --version
             solc --version
+          '';
+          scripts.sol.exec = ''
+            solc --abi -o output/ --overwrite --bin $1
           '';
           languages = {
             nix.enable = true;
@@ -83,6 +88,7 @@
           pre-commit.hooks = {
             alejandra.enable = true;
             commitizen.enable = true;
+            prettier.enable = true;
           };
         };
       };
